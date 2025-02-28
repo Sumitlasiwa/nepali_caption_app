@@ -19,7 +19,7 @@ app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 
 # Load model once at startup
 
-url = "https://drive.google.com/file/d/1wcEIqZwYdDETxKw8aks1aQD1QiyMsohD/view?usp=sharing"
+url = "https://drive.google.com/uc?id=1wcEIqZwYdDETxKw8aks1aQD1QiyMsohD"
 CHECKPOINT_PATH = "FinalAEsolveoverfit_checkpoint.pth"
 gdown.download(url, CHECKPOINT_PATH, quiet=False)
 # CHECKPOINT_PATH = r"C:\Users\Lenovo\OneDrive\Desktop\CodePlayGround\Image_cap_app\FinalAEsolveoverfit_checkpoint.pth"

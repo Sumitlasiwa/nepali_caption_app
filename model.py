@@ -92,7 +92,7 @@ class ImageCaptioningModel(nn.Module):
     
 # Load checkpoint function
 def load_checkpoint(filename="checkpoint.pth"):
-    checkpoint = torch.load(filename, map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+    checkpoint = torch.load(filename, map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'), weights_only=False)
 
     # Extract hyperparameters (to recreate model correctly)
     hyperparams = checkpoint['hyperparameters']
