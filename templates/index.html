@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Captioning in Nepali</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Header Styles */
+        h1 {
+            font-size: 2rem;
+            color: #004d40; /* Dark teal */
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 90%;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Image Container */
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%; /* Allow the image to take up the full width of its container */
+            max-height: 600px; /* Increase the maximum height of the image */
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form and Caption Container */
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #00796b; /* Teal */
+            margin-bottom: 20px;
+        }
+
+        /* Upload Form Styles */
+        form {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #00796b;
+            border-radius: 5px;
+            background: #f0f8ff;
+            width: 80%;
+            font-size: 1rem;
+            color: #00796b;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #004d40;
+        }
+
+        input[type="submit"] {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+
+        /* Caption Container */
+        .caption-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 0;
+        }
+
+        /* Speaker Button Styles */
+        .speaker-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2rem;
+            color: #00796b;
+            transition: color 0.3s ease;
+        }
+
+        .speaker-button:hover {
+            color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <h1>Image Captioning in Nepali</h1>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Image Container -->
+        <div class="image-container">
+            {% if image_path %}
+                <img src="{{ image_path }}" alt="Uploaded Image">
+            {% endif %}
+        </div>
+
+        <!-- Content Container (Form and Caption) -->
+        <div class="content-container">
+            <h2>Upload Image for Captioning</h2>
+            
+            <!-- Upload Form -->
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <input type="submit" value="Upload">
+            </form>
+
+            <!-- Display Generated Caption and Speaker Button -->
+            {% if caption %}
+            <div class="caption-container">
+                <h3>Generated Caption: {{ caption }}</h3>
+                <button class="speaker-button" onclick="playAudio()">&#128266;</button> <!-- Speaker icon -->
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Audio Element (Hidden) -->
+    {% if audio_file %}
+        <audio id="caption-audio" src="{{ url_for('static', filename='audio/' + audio_file) }}"></audio>
+    {% endif %}
+
+    <!-- JavaScript to Play Audio -->
+    <script>
+        function playAudio() {
+            const audio = document.getElementById('caption-audio');
+            if (audio) {
+                audio.play();
+            }
+        }
+    </script>
+</body>
+</html>
